@@ -110,8 +110,17 @@
   <main>
     
     <section class="card">
-
-
+      <button onclick="filterBySeries('Animal Crossing')">
+        Animal Crossing
+      </button>
+  
+      <button onclick="filterBySeries('Breath of the Wild')">
+        Breath of the Wild
+      </button>
+  
+      <button onclick="filterBySeries('Super Mario')">
+        Super Mario
+      </button>
     </section>
 
    <table class="card">
@@ -166,7 +175,7 @@
     async function getData(){
       const response = await fetch('https://amiiboapi.com/api/amiibo/');
       const data = await response.json();
-      return data.amiibo.slice(0, 100);//gets first 100 items (too much data)
+      return data.amiibo;
     }
 
     async function showAllGames(){
@@ -177,12 +186,11 @@
     showAllGames();    
 
     function filterBySeries(series){
-      
       let filtered = [];
-      
       for(let rec of state){
-        if (rec.gameSeries === series)
+        if (rec.gameSeries === series) {
           filtered.push(rec);
+        }
       }
       drawTable(filtered);
     }
